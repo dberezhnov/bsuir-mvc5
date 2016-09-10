@@ -1,0 +1,15 @@
+﻿@model Tuple<int, int, int, int>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Divide</title>
+</head>
+<body>
+    <div>@Model.Item1 / @Model.Item2 = @Model.Item3</div>
+    <div>@Model.Item1 % @Model.Item2 = @Model.Item4</div>
+</body>
+</html>

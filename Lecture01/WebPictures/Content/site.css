@@ -1,0 +1,22 @@
+﻿body {
+    margin: 0;
+    padding: 8px;
+    background: url(/Content/back.jpg) repeat;
+    color: white;
+    font-size: 18pt;
+}
+
+h2 {
+    text-align: center;
+}
+
+#result {
+    overflow: hidden;
+    height: 30px;
+    float: left;
+}
+
+#result.closing {
+    height: 0;
+    transition: height 2s ease-out;
+}

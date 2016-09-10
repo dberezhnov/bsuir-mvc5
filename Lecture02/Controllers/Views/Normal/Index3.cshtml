@@ -1,0 +1,17 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form</title>
+</head>
+<body>
+    <img src="@(Html.Action("Picture3A"))" />
+    <form method="post" action="/Normal/ActionString4?q=5">
+        <input name="f" type="text">
+        <input type="submit">
+    </form>
+</body>
+</html>

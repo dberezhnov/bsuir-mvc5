@@ -1,0 +1,9 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple HTML</title>
+</head>
+<body style="background: cyan">
+    Hello {0}
+</body>
+</html>
