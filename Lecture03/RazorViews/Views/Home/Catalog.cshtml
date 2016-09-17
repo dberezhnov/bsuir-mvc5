@@ -1,0 +1,33 @@
+﻿@using RazorViews.Models;
+@model IEnumerable<Product>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Catalog</title>
+    <style>
+        .one-product {
+            border: 1px black solid;
+            margin: 10px;
+        }
+        .left {
+            display: inline-block;
+            width: 60%;
+        }
+    </style>
+</head>
+<body>
+    <h2>Catalog</h2>
+    @foreach (Product p in Model)
+    {
+        <div>
+            @Html.Partial("Product", p, new ViewDataDictionary { ["Class"] = "left" })
+            <a href="~/Home/Details?id=@p.ID">Details</a>
+        </div>
+    }
+</body>
+</html>

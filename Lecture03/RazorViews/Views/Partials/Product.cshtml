@@ -1,0 +1,10 @@
+﻿@using RazorViews.Models;
+@model Product
+
+<div class="one-product @ViewBag.Class">
+    <b>ID: </b>@Model.ID<br />
+    <b>Name: </b>@Model.Name<br />
+    <b>Category: </b>@Model.Category<br />
+    <b>Amount: </b>@(Model.Amount?.ToString() ?? "unknown")<br />
+    <b>Price per unit: </b>@(Model.PricePerUnit?.ToString() ?? "unknown")<br />
+</div>

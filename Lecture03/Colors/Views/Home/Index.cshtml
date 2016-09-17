@@ -1,0 +1,42 @@
+﻿@using System.Linq;
+
+@{
+    Layout = null;
+    Func<Enum, object> colorDiv =
+        @<div style="width: 200px; height: 60px; border: 1px solid black; text-align: center; font-size: 20pt; line-height: 60px; background-color: @item">@item</div>;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        @foreach (var c in Enum.GetValues(Model.GetType()))
+        {
+            @colorDiv(c)
+        }
+    </div>
+    <hr />
+    <footer>
+        @colorDiv(Model)
+        <select name="e" id="mySelector">
+            @foreach (var c in Enum.GetValues(Model.GetType()))
+            {
+                <option selected="@(Model.Equals(c))" value="@c">@c</option>
+            }
+        </select>
+        <button onclick="change()">Change</button>
+    </footer>
+
+    <script type="text/javascript">
+        var colors = [@(string.Join(", ", Enum.GetValues(Model.GetType())))];
+        function change() {
+            var div = document.querySelector("footer>div");
+            div.style.backgroundColor = div.innerText = document.getElementById("mySelector").value;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+﻿@*
+    Синтаксис движка представлений Razor
+
+    @{ } - вставка кода
+    @ - вставка значения выражения с HTML-экранированием
+    @Html.Raw(...) - вставка значения выражения без HTML-экранирования
+    Если код состоит из одного оператора и начинается с ключевого
+    слова (if, for, ...), можно писать просто @ без фигурных скобок
+    @: - вставка следующего слова как текста, а не обработка как кода
+    <text>...</text> - псевдоэлемент для перехода в режим текста
+    (при генерации HTML опускается)
+    @(...) - позволяет явно указать границы выражения, значение
+    которого вставляется в страницу
+    @@ - вставка символа @
+    Ключевые слова @using, @model, @section, @helper
+*@
+
+@using RazorViews.Models;
+@model Product
+
+@{
+    Layout = null;
+    int x = 2;
+    // В блоках кода на C# можно писать и комментарии в стиле C#,
+    @* и комментарии в стиле Razor *@
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+    <div>ID: @Model.ID</div>
+    <div>Name: @Model.Name</div>
+    <div>Category: @Model.Category.</div>
+    <div>Amount: @Model.Amount</div>
+    <div>Price per unit: @Model.PricePerUnit</div>
+    <hr />
+    In stock: <input type="checkbox" readonly data-instock="@Model.InStock" checked="@Model.InStock" />
+    <hr />
+    Price: @Model.PricePerUnit - @(Model.Discount ? 10 : 0)% = @(Model.PricePerUnit * (Model.Discount ? 0.9M : 1M))
+    <hr />
+    <div>
+        @{ // если блок состоит из одного оператора, фигурные скобки можно как написать, так и опустить
+            switch (Model.InStock)
+            {
+                case true:
+                    <span style="color: lime">The item is in stock</span> x = 5;
+                    break;
+                case false:
+                    <span style="color: red">The item is out of stock</span> x = 6;
+                    break;
+                case null:
+                    <span style="color: blue">We don't know if this item will be in stock</span> x = 7;
+                    break;
+            } // Razor знает синтаксис C# и может определить, какая скобка закрывает оператор C#, а какая - блок Razor-кода
+        },
+        @if (Model.PricePerUnit != null)
+        { // а эти скобки при переходе в другие режимы опускать нельзя, даже если ветвь состоит из одного тега
+            <span>price is @Model.PricePerUnit</span>
+        }
+        else
+        {
+            <span>price is unknown</span>
+        }
+    </div>
+    @x, @Session["id"]
+</body>
+</html>
